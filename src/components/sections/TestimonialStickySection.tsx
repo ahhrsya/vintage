@@ -6,21 +6,24 @@ const testimonials = [
         quote: "We experimented with other tools, but at the end of the day, Finage was a clear winner on the efficiency rate. If they continue doing what they're doing, they'll have a place with us forever.",
         author: "Dr. Ronak Bhatt",
         title: "Founder, Chancellor & CEO, Tetra Institute",
-        color: "bg-[#2D262E]"
+        color: "bg-white",
+        textColor: "text-dark-primary"
     },
     {
         category: "Dedicated Service & Support",
         quote: "The level of customization we get with Finage is unparalleled. It's not just a platform; it's a partner that understands the specific needs of our family office structure.",
         author: "Sarah Jenkins",
         title: "Managing Director, Peak Wealth",
-        color: "bg-[#25282E]"
+        color: "bg-white",
+        textColor: "text-dark-primary"
     },
     {
         category: "Global Reach",
         quote: "Managing assets across three continents used to be a nightmare of consolidation. Now, it happens in real-time. Finage has fundamentally changed how we operate.",
         author: "Michael Chen",
         title: "Director of Operations, Heritage Global",
-        color: "bg-[#262E2A]"
+        color: "bg-white",
+        textColor: "text-dark-primary"
     }
 ];
 
@@ -61,19 +64,19 @@ const TestimonialCard = ({ testimonial: t, index }: { testimonial: any, index: n
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`${t.color} rounded-[32px] md:rounded-[48px] p-8 md:p-16 text-white shadow-2xl flex flex-col justify-between min-h-[400px] md:min-h-[500px] border border-white/5`}
+                className={`${t.color} ${t.textColor} rounded-[32px] md:rounded-[48px] p-8 md:p-16 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] flex flex-col justify-between min-h-[400px] md:min-h-[500px] border border-gray-100`}
             >
                 <div>
-                    <span className="text-sm font-medium opacity-60 mb-8 block font-mono tracking-widest uppercase">{t.category}</span>
+                    <span className="text-sm font-medium text-gray-400 mb-8 block font-mono tracking-widest uppercase">{t.category}</span>
                     <p className="text-xl md:text-3xl lg:text-4xl font-medium leading-tight md:leading-tight">
                         "{t.quote}"
                     </p>
                 </div>
                 <div className="flex items-center gap-6 mt-12 md:mt-0">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gray-500 to-gray-700 flex-shrink-0" />
+                    <div className="w-14 h-14 rounded-full bg-gray-100 flex-shrink-0" />
                     <div className="text-left">
-                        <div className="font-bold text-lg md:text-xl">{t.author}</div>
-                        <div className="text-sm md:text-base opacity-60">{t.title}</div>
+                        <div className="font-bold text-lg md:text-xl text-dark-primary">{t.author}</div>
+                        <div className="text-sm md:text-base text-gray-500">{t.title}</div>
                     </div>
                 </div>
             </motion.div>
