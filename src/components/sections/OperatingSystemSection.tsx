@@ -73,60 +73,49 @@ export const OperatingSystemSection = () => {
                         </SectionReveal>
 
                         <div className="space-y-0">
-                            {tabs.map((tab, idx) => (
-                                <div key={tab.id} className={`${idx === 0 ? '' : 'border-t'} border-white/10 last:border-b`}>
+                            {tabs.map((tab) => (
+                                <div key={tab.id} className="relative">
                                     <button
                                         onClick={() => handleTabClick(tab.id)}
-                                        className="w-full text-left py-8 group relative outline-none"
+                                        className="w-full text-left py-8 group outline-none"
                                     >
-                                        <div className="flex items-start gap-4">
-                                            {/* Dot Indicator */}
-                                            <div className="mt-2 relative">
-                                                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activeTab === tab.id ? 'bg-blue-500 scale-125' : 'bg-transparent'}`} />
+                                        <div className="flex-1">
+                                            <h3 className={`text-xl font-bold transition-colors duration-300 ${activeTab === tab.id ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
+                                                {tab.title}
+                                            </h3>
+
+                                            <AnimatePresence>
                                                 {activeTab === tab.id && (
                                                     <motion.div
-                                                        layoutId="activeDot"
-                                                        className="absolute inset-0 bg-blue-500 rounded-full blur-[4px]"
-                                                    />
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: 'auto', opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                                        className="overflow-hidden"
+                                                    >
+                                                        <p className="mt-4 text-gray-400 leading-relaxed text-sm md:text-base pr-4">
+                                                            {tab.description}
+                                                        </p>
+                                                        <div className="mt-6 flex items-center gap-2 text-blue-500 font-bold text-sm tracking-tight cursor-pointer hover:gap-3 transition-all">
+                                                            Explore More <ArrowRight size={14} />
+                                                        </div>
+                                                    </motion.div>
                                                 )}
-                                            </div>
-
-                                            <div className="flex-1">
-                                                <h3 className={`text-xl font-bold transition-colors duration-300 ${activeTab === tab.id ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
-                                                    {tab.title}
-                                                </h3>
-
-                                                <AnimatePresence>
-                                                    {activeTab === tab.id && (
-                                                        <motion.div
-                                                            initial={{ height: 0, opacity: 0 }}
-                                                            animate={{ height: 'auto', opacity: 1 }}
-                                                            exit={{ height: 0, opacity: 0 }}
-                                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                                            className="overflow-hidden"
-                                                        >
-                                                            <p className="mt-4 text-gray-400 leading-relaxed text-sm md:text-base pr-4">
-                                                                {tab.description}
-                                                            </p>
-                                                            <div className="mt-6 flex items-center gap-2 text-blue-500 font-bold text-sm tracking-tight cursor-pointer hover:gap-3 transition-all">
-                                                                Explore More <ArrowRight size={14} />
-                                                            </div>
-
-                                                            {/* Progress Bar at bottom of active tab */}
-                                                            <div className="mt-8 h-[1px] w-full bg-white/5 relative overflow-hidden">
-                                                                <motion.div
-                                                                    initial={{ width: 0 }}
-                                                                    animate={{ width: `${progress}%` }}
-                                                                    transition={{ duration: 0.1, ease: 'linear' }}
-                                                                    className="absolute inset-y-0 left-0 bg-blue-500"
-                                                                />
-                                                            </div>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-                                            </div>
+                                            </AnimatePresence>
                                         </div>
                                     </button>
+
+                                    {/* Bottom Line / Progress Bar */}
+                                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/10">
+                                        {activeTab === tab.id && (
+                                            <motion.div
+                                                initial={{ width: 0 }}
+                                                animate={{ width: `${progress}%` }}
+                                                transition={{ duration: 0.1, ease: 'linear' }}
+                                                className="absolute inset-y-0 left-0 bg-blue-500"
+                                            />
+                                        )}
+                                    </div>
                                 </div>
                             ))}
                         </div>
