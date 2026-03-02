@@ -56,27 +56,27 @@ export const TestimonialStickySection = () => {
 const TestimonialCard = ({ testimonial: t, index }: { testimonial: any, index: number }) => {
     return (
         <div
-            className="sticky top-[150px] mb-[40vh] last:mb-0"
+            className="sticky top-[120px] mb-[30vh] last:mb-0"
             style={{ zIndex: index }}
         >
             <motion.div
-                initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`${t.color} ${t.textColor} rounded-[32px] md:rounded-[48px] p-8 md:p-16 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] flex flex-col justify-between min-h-[400px] md:min-h-[500px] border border-gray-100`}
+                className={`${t.color} ${t.textColor} rounded-[48px] p-10 md:p-20 flex flex-col justify-between min-h-[500px] md:min-h-[550px] border border-gray-200 relative overflow-hidden`}
             >
                 <div>
-                    <span className="text-sm font-medium text-gray-400 mb-8 block font-mono tracking-widest uppercase">{t.category}</span>
-                    <p className="text-xl md:text-3xl lg:text-4xl font-medium leading-tight md:leading-tight">
+                    <span className="text-sm font-medium text-gray-400 mb-10 block font-mono tracking-widest uppercase">{t.category}</span>
+                    <p className="text-2xl md:text-4xl lg:text-5xl font-medium leading-[1.15] tracking-tight">
                         "{t.quote}"
                     </p>
                 </div>
-                <div className="flex items-center gap-6 mt-12 md:mt-0">
-                    <div className="w-14 h-14 rounded-full bg-gray-100 flex-shrink-0" />
+                <div className="flex items-center gap-6 mt-16">
+                    <div className="w-16 h-16 rounded-full bg-gray-100 flex-shrink-0" />
                     <div className="text-left">
-                        <div className="font-bold text-lg md:text-xl text-dark-primary">{t.author}</div>
-                        <div className="text-sm md:text-base text-gray-500">{t.title}</div>
+                        <div className="font-bold text-xl text-dark-primary">{t.author}</div>
+                        <div className="text-base text-gray-500">{t.title}</div>
                     </div>
                 </div>
             </motion.div>
