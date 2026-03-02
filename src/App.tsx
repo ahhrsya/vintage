@@ -1,5 +1,6 @@
 import { Navbar } from './components/layout/Navbar';
 import { HeroSection } from './components/sections/HeroSection';
+import { AboutUsSection } from './components/sections/AboutUsSection';
 import { MetricsSection } from './components/sections/MetricsSection';
 import { FeaturesSection } from './components/sections/FeaturesSection';
 import { OperatingSystemSection } from './components/sections/OperatingSystemSection';
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <main>
         <HeroSection />
+        <AboutUsSection />
         <MetricsSection />
         <FeaturesSection />
         <OperatingSystemSection />
