@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionReveal } from '../ui/SectionReveal';
 import { StatusTag } from '../ui/MockDashboard';
@@ -14,6 +14,7 @@ interface TabData {
 
 export const OperatingSystemSection = () => {
     const [activeTab, setActiveTab] = useState<TabId>('record');
+    const [progress, setProgress] = useState(0);
 
     const tabs: TabData[] = [
         {
@@ -33,6 +34,31 @@ export const OperatingSystemSection = () => {
         },
     ];
 
+    useEffect(() => {
+        const interval = 50; // Update every 50ms
+        const duration = 5000; // 5 seconds per tab
+        const step = (interval / duration) * 100;
+
+        const timer = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 100) {
+                    const currentIndex = tabs.findIndex(t => t.id === activeTab);
+                    const nextIndex = (currentIndex + 1) % tabs.length;
+                    setActiveTab(tabs[nextIndex].id);
+                    return 0;
+                }
+                return prev + step;
+            });
+        }, interval);
+
+        return () => clearInterval(timer);
+    }, [activeTab]);
+
+    const handleTabClick = (id: TabId) => {
+        setActiveTab(id);
+        setProgress(0);
+    };
+
     return (
         <section className="py-32 bg-dark-primary text-white overflow-hidden">
             <div className="max-w-[1200px] mx-auto px-6">
@@ -47,10 +73,10 @@ export const OperatingSystemSection = () => {
                         </SectionReveal>
 
                         <div className="space-y-0">
-                            {tabs.map((tab) => (
-                                <div key={tab.id} className="border-t border-white/10 last:border-b">
+                            {tabs.map((tab, idx) => (
+                                <div key={tab.id} className={`${idx === 0 ? '' : 'border-t'} border-white/10 last:border-b`}>
                                     <button
-                                        onClick={() => setActiveTab(tab.id)}
+                                        onClick={() => handleTabClick(tab.id)}
                                         className="w-full text-left py-8 group relative outline-none"
                                     >
                                         <div className="flex items-start gap-4">
@@ -84,6 +110,16 @@ export const OperatingSystemSection = () => {
                                                             </p>
                                                             <div className="mt-6 flex items-center gap-2 text-blue-500 font-bold text-sm tracking-tight cursor-pointer hover:gap-3 transition-all">
                                                                 Explore More <ArrowRight size={14} />
+                                                            </div>
+
+                                                            {/* Progress Bar at bottom of active tab */}
+                                                            <div className="mt-8 h-[1px] w-full bg-white/5 relative overflow-hidden">
+                                                                <motion.div
+                                                                    initial={{ width: 0 }}
+                                                                    animate={{ width: `${progress}%` }}
+                                                                    transition={{ duration: 0.1, ease: 'linear' }}
+                                                                    className="absolute inset-y-0 left-0 bg-blue-500"
+                                                                />
                                                             </div>
                                                         </motion.div>
                                                     )}

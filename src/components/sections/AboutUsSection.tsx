@@ -22,76 +22,78 @@ export const AboutUsSection = () => {
     const words = text.split(" ");
 
     return (
-        <section ref={containerRef} className="py-32 bg-white text-dark-primary overflow-hidden">
-            <div className="max-w-[1200px] mx-auto px-6 text-center">
-                {/* Badge */}
-                <div className="flex justify-center mb-8">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-100 border border-gray-200 text-[10px] font-bold tracking-[0.15em] uppercase text-gray-500">
-                        <Star size={12} className="text-blue-500 fill-blue-500" />
-                        About Us
+        <section ref={containerRef} className="h-[250vh] bg-white text-dark-primary relative">
+            <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+                <div className="max-w-[1200px] mx-auto px-6 text-center w-full">
+                    {/* Badge */}
+                    <div className="flex justify-center mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-100 border border-gray-200 text-[10px] font-bold tracking-[0.15em] uppercase text-gray-500">
+                            <Star size={12} className="text-blue-500 fill-blue-500" />
+                            About Us
+                        </div>
                     </div>
-                </div>
 
-                {/* Dynamic Highlight Text */}
-                <div className="max-w-4xl mx-auto mb-20">
-                    <h2 className="text-3xl md:text-5xl font-medium leading-[1.15] tracking-[-0.04em] text-gray-300">
-                        {words.map((word, i) => {
-                            const start = i / words.length;
-                            const end = (i + 1) / words.length;
-                            return (
-                                <Word key={i} progress={scrollYProgress} range={[start * 0.4 + 0.2, end * 0.4 + 0.2]}>
-                                    {word}
-                                </Word>
-                            );
-                        })}
-                    </h2>
-                </div>
+                    {/* Dynamic Highlight Text */}
+                    <div className="max-w-4xl mx-auto mb-12">
+                        <h2 className="text-3xl md:text-5xl font-medium leading-[1.15] tracking-[-0.04em] text-gray-300">
+                            {words.map((word, i) => {
+                                const start = i / words.length;
+                                const end = (i + 1) / words.length;
+                                return (
+                                    <Word key={i} progress={scrollYProgress} range={[start * 0.4, end * 0.4]}>
+                                        {word}
+                                    </Word>
+                                );
+                            })}
+                        </h2>
+                    </div>
 
-                {/* Dashboard Image with Browser Frame */}
-                <div className="relative max-w-4xl mx-auto mb-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="bg-dark-secondary rounded-2xl border border-white/10 shadow-2xl overflow-hidden p-1"
-                    >
-                        {/* Browser Header */}
-                        <div className="flex items-center gap-1.5 px-4 py-3 bg-dark-secondary border-b border-white/5">
-                            <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
-                            <div className="ml-4 flex-1 h-5 bg-black/20 rounded-md" />
-                        </div>
-
-                        {/* Dashboard Image */}
-                        <div className="bg-dark-primary">
-                            <img
-                                src={dashboardImg}
-                                alt="Finage Dashboard"
-                                className="w-full h-auto block"
-                            />
-                        </div>
-                    </motion.div>
-                </div>
-
-                {/* Metrics Row */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 border-t border-gray-100 pt-16 max-w-4xl mx-auto">
-                    {stats.map((stat, index) => (
+                    {/* Dashboard Image with Browser Frame */}
+                    <div className="relative max-w-4xl mx-auto mb-12">
                         <motion.div
-                            key={stat.label}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.6 }}
-                            className="flex flex-col text-left"
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="bg-dark-secondary rounded-2xl border border-white/10 shadow-2xl overflow-hidden p-1"
                         >
-                            <span className="font-bold text-3xl mb-1 tracking-tight">{stat.value}</span>
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                                {stat.label}
-                            </span>
+                            {/* Browser Header */}
+                            <div className="flex items-center gap-1.5 px-4 py-3 bg-dark-secondary border-b border-white/5">
+                                <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                                <div className="ml-4 flex-1 h-5 bg-black/20 rounded-md" />
+                            </div>
+
+                            {/* Dashboard Image */}
+                            <div className="bg-dark-primary">
+                                <img
+                                    src={dashboardImg}
+                                    alt="Finage Dashboard"
+                                    className="w-full h-auto block"
+                                />
+                            </div>
                         </motion.div>
-                    ))}
+                    </div>
+
+                    {/* Metrics Row */}
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 border-t border-gray-100 pt-12 max-w-4xl mx-auto">
+                        {stats.map((stat, index) => (
+                            <motion.div
+                                key={stat.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1, duration: 0.6 }}
+                                className="flex flex-col text-left"
+                            >
+                                <span className="font-bold text-2xl md:text-3xl mb-1 tracking-tight">{stat.value}</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                                    {stat.label}
+                                </span>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
