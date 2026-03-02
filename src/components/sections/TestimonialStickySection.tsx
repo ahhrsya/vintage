@@ -38,44 +38,37 @@ export const TestimonialStickySection = () => {
     return (
         <section ref={containerRef} className="relative h-[450vh] bg-[#F8F9FA] text-dark-primary">
             {/* Sticky viewport */}
-            <div className="sticky top-0 h-screen w-full flex flex-col pt-32 overflow-hidden">
-                <div className="max-w-[1200px] mx-auto px-6 text-center w-full mb-12">
-                    <div className="inline-flex items-center px-4 py-1 rounded-full bg-white border border-gray-200 text-[10px] font-bold tracking-widest uppercase text-gray-500 mb-6">
+            <div className="sticky top-0 h-screen w-full flex flex-col pt-16 md:pt-20 overflow-hidden">
+                <div className="max-w-[1200px] mx-auto px-6 text-center w-full mb-8">
+                    <div className="inline-flex items-center px-4 py-1 rounded-full bg-white border border-gray-200 text-[10px] font-bold tracking-widest uppercase text-gray-500 mb-4">
                         Testimonials
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-medium tracking-tight mb-4">
+                    <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3">
                         A platform family offices<br />can finally <span className="italic">rely on.</span>
                     </h2>
-                    <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">
+                    <p className="text-gray-500 max-w-2xl mx-auto text-xs md:text-sm">
                         Join 100+ forward-thinking family offices maximizing their financial power.
                     </p>
                 </div>
 
                 {/* The Stacking Deck */}
-                <div className="relative flex-1 w-full max-w-4xl mx-auto px-6 mb-20">
+                <div className="relative flex-1 w-full max-w-4xl mx-auto px-6 mb-12">
                     {testimonials.map((t, i) => {
-                        // Ranges for scroll: 
-                        // Card 0: 0 -> 0.2 (stays after)
-                        // Card 1: 0.2 -> 0.4 (slides up and covers)
-                        // Card 2: 0.4 -> 0.6 (slides up and covers)
                         const start = (i / testimonials.length) * 0.8;
                         const end = start + 0.2;
 
-                        // Animation specifically for this card
                         const y = useTransform(
                             scrollYProgress,
                             [start - 0.1, start, 1],
-                            [800, 0, 0] // Starts off-screen, slides to 0, stays at 0
+                            [800, 0, 0]
                         );
 
-                        // Subtle scale for cards underneath
                         const scale = useTransform(
                             scrollYProgress,
                             [end, end + 0.1],
                             [1, 0.98]
                         );
 
-                        // Slight darkness/opacity for cards underneath
                         const opacity = useTransform(
                             scrollYProgress,
                             [end, end + 0.1],
@@ -91,22 +84,21 @@ export const TestimonialStickySection = () => {
                                     opacity: i < testimonials.length - 1 ? opacity : 1,
                                     zIndex: i
                                 }}
-                                className="absolute inset-x-6 mx-auto bg-white rounded-[40px] md:rounded-[48px] p-8 md:p-14 border border-gray-200 shadow-none flex flex-col justify-between h-[450px] md:h-[500px]"
+                                className="absolute inset-x-6 mx-auto bg-white rounded-[32px] md:rounded-[40px] p-8 md:p-12 border border-gray-200 shadow-none flex flex-col justify-between h-[360px] md:h-[420px] max-h-[50vh]"
                             >
                                 <div>
-                                    <span className="text-[11px] font-bold tracking-[0.2em] text-gray-400 mb-8 block uppercase">
+                                    <span className="text-[10px] font-bold tracking-[0.2em] text-gray-400 mb-6 block uppercase">
                                         {t.category}
                                     </span>
-                                    {/* REDUCED FONT SIZE HERE */}
-                                    <p className="text-xl md:text-2xl lg:text-3xl font-medium leading-[1.3] text-dark-primary tracking-tight">
+                                    <p className="text-lg md:text-xl lg:text-2xl font-medium leading-[1.4] text-dark-primary tracking-tight">
                                         "{t.quote}"
                                     </p>
                                 </div>
-                                <div className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-full bg-gray-100 border border-gray-200" />
+                                <div className="flex items-center gap-4 mt-8">
+                                    <div className="w-10 h-10 rounded-full bg-gray-100 border border-gray-200" />
                                     <div>
-                                        <div className="font-bold text-base text-dark-primary">{t.author}</div>
-                                        <div className="text-xs text-gray-400 font-medium">{t.title}</div>
+                                        <div className="font-bold text-sm md:text-base text-dark-primary">{t.author}</div>
+                                        <div className="text-[10px] md:text-xs text-gray-400 font-medium">{t.title}</div>
                                     </div>
                                 </div>
                             </motion.div>
